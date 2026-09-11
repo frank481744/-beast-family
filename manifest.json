@@ -1,0 +1,10 @@
+{
+  "name": "BEAST FAMILY",
+  "short_name": "BEAST FAMILY",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d0f12",
+  "theme_color": "#111214",
+  "description": "Des petits moments famille, simples et sans culpabilité.",
+  "icons": []
+}

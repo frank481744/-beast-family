@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#111214" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BEAST FAMILY" />
+  <title>BEAST FAMILY ❤️</title>
+  <link rel="manifest" href="./manifest.json">
+  <style>
+    :root{
+      --bg:#0d0f12; --card:#171a1f; --card2:#1f232a; --text:#f5f7fa; --muted:#9fa6b2;
+      --line:#2a2f37; --accent:#ff4d73; --accent2:#ff8a5b; --green:#52d273; --yellow:#ffc857;
+      --shadow:0 16px 40px rgba(0,0,0,.28);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+    body{min-height:100vh;padding-bottom:92px}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .wrap{max-width:720px;margin:0 auto;padding:env(safe-area-inset-top) 16px 24px}
+    .top{padding:18px 2px 8px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:950;letter-spacing:.4px;font-size:22px}
+    .brand span{color:var(--accent)}
+    .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--muted);font-size:13px}
+    .hero{
+      background:linear-gradient(145deg, rgba(255,77,115,.18), rgba(255,138,91,.08));
+      border:1px solid rgba(255,77,115,.25);border-radius:24px;padding:20px;margin:10px 0 14px;box-shadow:var(--shadow)
+    }
+    .hero h1{font-size:29px;line-height:1.05;margin:0 0 7px}
+    .hero p{margin:0;color:#d1d5db;line-height:1.35}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0}
+    .stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 10px;text-align:center}
+    .stat b{display:block;font-size:20px}.stat small{color:var(--muted);font-size:11px}
+    .section{margin:17px 0}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin:0 2px 10px}
+    .section-title h2{margin:0;font-size:17px}.section-title small{color:var(--muted)}
+    .big{
+      width:100%;border:0;border-radius:22px;padding:19px 16px;font-weight:900;font-size:20px;color:white;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 12px 28px rgba(255,77,115,.2)
+    }
+    .big:active{transform:scale(.99)}
+    .secondary{width:100%;border:1px solid var(--line);border-radius:18px;padding:15px;background:var(--card);color:var(--text);font-weight:800}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .quick{border:1px solid var(--line);border-radius:18px;background:var(--card);color:var(--text);padding:15px;text-align:left}
+    .quick b{display:block;margin-top:6px;font-size:15px}.quick span{font-size:23px}.quick small{color:var(--muted)}
+    .chips{display:flex;gap:8px;overflow:auto;padding-bottom:2px;scrollbar-width:none}
+    .chip{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:9px 12px}
+    .chip.on{background:#2a2026;color:#fff;border-color:#8c3a50}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
+    .progress{height:10px;background:#272b32;border-radius:99px;overflow:hidden;margin-top:10px}
+    .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}
+    .note{color:var(--muted);font-size:13px;line-height:1.4}
+    .activity-card{background:linear-gradient(145deg,#1c2026,#16191e);border:1px solid var(--line);border-radius:24px;padding:20px}
+    .activity-card .emoji{font-size:45px}
+    .activity-card h3{font-size:24px;margin:8px 0 5px}
+    .activity-card p{color:#c8cdd5;line-height:1.45;margin:0 0 12px}
+    .tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+    .tag{font-size:12px;background:#252a31;border:1px solid #303640;border-radius:999px;padding:6px 9px;color:#bec5cf}
+    .actions{display:grid;grid-template-columns:1.5fr 1fr;gap:9px;margin-top:14px}
+    .go{border:0;border-radius:16px;background:var(--green);color:#08100a;padding:14px;font-weight:900}
+    .again{border:1px solid var(--line);border-radius:16px;background:var(--card2);color:var(--text);font-weight:800}
+    .timer{font-size:58px;font-weight:950;text-align:center;letter-spacing:-2px;margin:14px 0}
+    .timermsg{text-align:center;color:#d7dbe1}
+    .timer-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .danger{border:1px solid #6f2f3b;background:#29191e;color:#ffb0bf;border-radius:16px;padding:14px;font-weight:800}
+    .complete{border:0;background:var(--green);color:#06110a;border-radius:16px;padding:14px;font-weight:900}
+    .history-item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+    .history-item:last-child{border:0}.history-item small{color:var(--muted)}
+    .bottom{
+      position:fixed;bottom:0;left:0;right:0;background:rgba(13,15,18,.94);backdrop-filter:blur(16px);
+      border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));z-index:10
+    }
+    .nav{max-width:720px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+    .nav button{border:0;background:transparent;color:#9ca3af;padding:8px 3px;border-radius:12px;font-size:11px}
+    .nav button b{display:block;font-size:20px;margin-bottom:2px}.nav button.active{background:#252931;color:white}
+    .screen{display:none}.screen.active{display:block}
+    .modal{
+      position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-end;z-index:30
+    }
+    .modal.on{display:flex}
+    .sheet{width:100%;max-width:720px;margin:0 auto;background:#16191e;border:1px solid var(--line);border-radius:26px 26px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
+    .sheet h2{margin-top:0}
+    label{display:block;color:#c8cdd5;font-size:13px;margin:14px 0 7px}
+    input,select{width:100%;background:#111419;color:white;border:1px solid var(--line);border-radius:14px;padding:12px}
+    .row{display:flex;gap:8px;align-items:center}
+    .row>*{flex:1}
+    .tiny{font-size:11px;color:var(--muted)}
+    .install{background:#152419;border-color:#285b34}
+    .couple{background:linear-gradient(145deg,rgba(166,89,255,.14),rgba(255,77,115,.08))}
+    .hidden{display:none!important}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="home" class="screen active">
+    <div class="top">
+      <div class="brand">🦍 BEAST <span>FAMILY</span></div>
+      <button class="pill" onclick="openSettings()">⚙️ Réglages</button>
+    </div>
+
+    <div class="hero">
+      <h1>Du vrai temps ensemble. ❤️</h1>
+      <p>Pas besoin d'une grosse sortie. Même 10 minutes où tu décroches pour vrai, ça compte.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="weekMinutes">0</b><small>MIN CETTE SEMAINE</small></div>
+      <div class="stat"><b id="weekMoments">0</b><small>MOMENTS</small></div>
+      <div class="stat"><b id="weekGoalTxt">0/3</b><small>OBJECTIF</small></div>
+    </div>
+
+    <div class="section">
+      <button class="big" onclick="openPicker()">🎲 ON FAIT QUOI EN FAMILLE?</button>
+    </div>
+
+    <div class="section">
+      <div class="grid2">
+        <button class="quick" onclick="quickPick('low')"><span>😵</span><b>Zéro énergie</b><small>Facile, calme, presque aucun setup</small></button>
+        <button class="quick" onclick="startHouseworkBreak()"><span>🧹🚫</span><b>Le ménage attend</b><small>20 min 100 % famille</small></button>
+        <button class="quick" onclick="quickPick('outside')"><span>☀️</span><b>Dehors vite fait</b><small>Quand faut sortir de la maison</small></button>
+        <button class="quick" onclick="quickPick('free')"><span>💸</span><b>0 $</b><small>Seulement des idées gratuites</small></button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><h2>🎯 Objectif de la semaine</h2><small id="goalPercent">0 %</small></div>
+      <div class="card">
+        <b id="goalSentence">3 moments famille cette semaine</b>
+        <div class="progress"><div class="bar" id="goalBar"></div></div>
+        <p class="note" id="goalNote">Aucune punition si une journée déborde. On compte juste les moments faits.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <button class="secondary" onclick="showScreen('couple')">💑 Petit moment avec ma blonde</button>
+    </div>
+  </section>
+
+  <section id="pick" class="screen">
+    <div class="top"><div class="brand">🎲 TROUVER UNE IDÉE</div><button class="pill" onclick="showScreen('home')">← Retour</button></div>
+    <div class="section">
+      <div class="section-title"><h2>Combien de temps?</h2></div>
+      <div class="chips" id="durationChips">
+        <button class="chip on" data-duration="10">10 min</button>
+        <button class="chip" data-duration="20">20 min</button>
+        <button class="chip" data-duration="30">30 min</button>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title"><h2>On est où?</h2></div>
+      <div class="chips" id="placeChips">
+        <button class="chip on" data-place="any">N'importe où</button>
+        <button class="chip" data-place="inside">🏠 Dedans</button>
+        <button class="chip" data-place="outside">☀️ Dehors</button>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title"><h2>Énergie de papa 😅</h2></div>
+      <div class="chips" id="energyChips">
+        <button class="chip on" data-energy="any">Peu importe</button>
+        <button class="chip" data-energy="low">😵 Basse</button>
+        <button class="chip" data-energy="medium">🙂 Correcte</button>
+        <button class="chip" data-energy="high">🔥 Haute</button>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title"><h2>Budget</h2></div>
+      <div class="chips" id="costChips">
+        <button class="chip on" data-cost="any">Peu importe</button>
+        <button class="chip" data-cost="free">💸 Gratuit</button>
+      </div>
+    </div>
+    <div class="section"><button class="big" onclick="pickActivity()">🎲 CHOISIS POUR NOUS</button></div>
+    <div id="pickedArea" class="section"></div>
+  </section>
+
+  <section id="timer" class="screen">
+    <div class="top"><div class="brand">❤️ MODE FAMILLE</div><button class="pill" onclick="cancelTimer()">✕</button></div>
+    <div class="hero">
+      <h1 id="timerTitle">Moment famille</h1>
+      <p id="timerActivity">Le téléphone reste ici. Va profiter d'eux. 😈❤️</p>
+    </div>
+    <div class="card">
+      <div class="timer" id="timerDisplay">20:00</div>
+      <p class="timermsg" id="timerMessage">🧹 Le ménage peut attendre. Pendant ce chrono, vous passez en premier.</p>
+      <div class="timer-controls">
+        <button class="danger" onclick="cancelTimer()">Arrêter</button>
+        <button class="complete" onclick="completeMoment()">✅ Moment fait!</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="history" class="screen">
+    <div class="top"><div class="brand">📸 NOS MOMENTS</div><button class="pill" onclick="showScreen('home')">Accueil</button></div>
+    <div class="section">
+      <div class="card">
+        <b id="allMinutes">0 min ensemble depuis le début</b>
+        <p class="note">Même les petits 10 minutes comptent.</p>
+      </div>
+    </div>
+    <div id="historyList" class="card"></div>
+  </section>
+
+  <section id="ideas" class="screen">
+    <div class="top"><div class="brand">💡 IDÉES</div><button class="pill" onclick="showScreen('home')">Accueil</button></div>
+    <div class="section">
+      <div class="chips">
+        <button class="chip on" onclick="renderIdeas('all',this)">Toutes</button>
+        <button class="chip" onclick="renderIdeas('inside',this)">🏠 Dedans</button>
+        <button class="chip" onclick="renderIdeas('outside',this)">☀️ Dehors</button>
+        <button class="chip" onclick="renderIdeas('low',this)">😵 Faciles</button>
+      </div>
+    </div>
+    <div id="ideasList"></div>
+  </section>
+
+  <section id="couple" class="screen">
+    <div class="top"><div class="brand">💑 MODE NOUS DEUX</div><button class="pill" onclick="showScreen('home')">← Retour</button></div>
+    <div class="hero couple">
+      <h1>Un petit moment juste vous deux.</h1>
+      <p>Pas besoin d'une grosse date. Même 15 minutes tranquilles sans ménage ni téléphone, ça compte aussi.</p>
+    </div>
+    <div class="grid2">
+      <button class="quick" onclick="startCustomTimer(15,'☕ Café / boisson ensemble','15 minutes assis ensemble, sans tâche en parallèle.')"><span>☕</span><b>15 min ensemble</b><small>Boire quelque chose et jaser</small></button>
+      <button class="quick" onclick="startCustomTimer(20,'🚶 Petite marche à deux','20 minutes dehors, téléphone dans la poche.')"><span>🚶</span><b>Petite marche</b><small>Simple et gratuit</small></button>
+      <button class="quick" onclick="startCustomTimer(30,'📺 Un épisode collés','Une demi-heure sans plier de linge en même temps 😅')"><span>📺</span><b>Un épisode</b><small>Mode relax</small></button>
+      <button class="quick" onclick="startCustomTimer(15,'❤️ Check-in de couple','Chacun raconte le meilleur et le plus difficile de sa journée.')"><span>❤️</span><b>Petit check-in</b><small>15 minutes pour jaser</small></button>
+    </div>
+  </section>
+
+</div>
+
+<div class="bottom">
+  <div class="nav">
+    <button class="active" data-screen="home" onclick="showScreen('home')"><b>🏠</b>Accueil</button>
+    <button data-screen="pick" onclick="openPicker()"><b>🎲</b>Choisir</button>
+    <button data-screen="ideas" onclick="showScreen('ideas');renderIdeas('all')"><b>💡</b>Idées</button>
+    <button data-screen="history" onclick="showScreen('history')"><b>❤️</b>Moments</button>
+  </div>
+</div>
+
+<div id="settingsModal" class="modal" onclick="if(event.target===this)closeSettings()">
+  <div class="sheet">
+    <h2>⚙️ Réglages</h2>
+    <label>Objectif de moments famille par semaine</label>
+    <select id="weeklyGoal">
+      <option value="2">2 moments</option><option value="3">3 moments</option><option value="4">4 moments</option>
+      <option value="5">5 moments</option><option value="6">6 moments</option><option value="7">7 moments</option>
+    </select>
+
+    <label>Prénom des enfants (optionnel)</label>
+    <input id="childrenNames" placeholder="Ex.: Dylan, Nolan, ..." />
+    <p class="tiny">Le mode principal reste toujours en groupe. Les prénoms servent seulement pour proposer un petit bonus individuel de temps en temps.</p>
+
+    <label>Nom de ta blonde (optionnel)</label>
+    <input id="partnerName" placeholder="Ex.: Marie" />
+
+    <div class="section card install">
+      <b>📱 Pour l'avoir comme une vraie app sur iPhone</b>
+      <p class="note">Ouvre cette page dans Safari → Partager → « Sur l'écran d'accueil ». Aucun abonnement requis.</p>
+    </div>
+
+    <div class="row">
+      <button class="secondary" onclick="closeSettings()">Annuler</button>
+      <button class="big" style="font-size:16px;padding:15px" onclick="saveSettings()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const activities = [
+ {e:"🕵️",n:"Cache-cache éclair",d:[10,20],p:["inside"],energy:"medium",cost:"free",desc:"Une partie rapide. Le dernier trouvé choisit où tout le monde se cache à la prochaine ronde."},
+ {e:"🎨",n:"Défi dessin ridicule",d:[10,20,30],p:["inside"],energy:"low",cost:"free",desc:"Tout le monde dessine le même sujet sans regarder les autres. Votez pour le plus drôle, pas le plus beau."},
+ {e:"🧱",n:"Tour impossible",d:[10,20],p:["inside"],energy:"low",cost:"free",desc:"Avec Lego, blocs, verres de plastique ou n'importe quoi: bâtissez la plus haute tour en équipe."},
+ {e:"💃",n:"3 chansons, tout le monde danse",d:[10],p:["inside"],energy:"medium",cost:"free",desc:"Chacun choisit une chanson. Pendant 3 chansons, personne ne reste assis."},
+ {e:"🎵",n:"DJ de la famille",d:[10,20],p:["inside"],energy:"low",cost:"free",desc:"Chacun choisit une chanson. Les autres doivent lui donner une note complètement exagérée sur 10."},
+ {e:"🃏",n:"Jeu de cartes express",d:[20,30],p:["inside"],energy:"low",cost:"free",desc:"Uno, bataille ou un jeu simple. Une seule règle: pas de téléphone pendant la partie."},
+ {e:"🥤",n:"Collation spéciale ensemble",d:[10,20],p:["inside"],energy:"low",cost:"free",desc:"Préparez une collation avec ce qu'il y a déjà à la maison et mangez-la tous ensemble."},
+ {e:"🍿",n:"Mini cinéma maison",d:[30],p:["inside"],energy:"low",cost:"free",desc:"Choisissez un épisode ou 30 min d'un film. Lumières basses, tout le monde collé."},
+ {e:"📚",n:"Histoire inventée en gang",d:[10,20],p:["inside"],energy:"low",cost:"free",desc:"Papa commence une histoire avec une phrase. Chacun ajoute une phrase à tour de rôle."},
+ {e:"😂",n:"Concours de faces",d:[10],p:["inside","outside"],energy:"low",cost:"free",desc:"Chacun doit faire rire les autres sans les toucher. Celui qui rit devient le prochain."},
+ {e:"🧺",n:"Fort de couvertures",d:[20,30],p:["inside"],energy:"medium",cost:"free",desc:"Construisez un fort avec couvertures, coussins et chaises. Bonus: collation dedans."},
+ {e:"🧩",n:"Casse-tête en équipe",d:[20,30],p:["inside"],energy:"low",cost:"free",desc:"Un casse-tête ou petit défi logique en gang. Le but est de coopérer, pas de gagner."},
+ {e:"🌟",n:"Chasse au trésor minute",d:[20,30],p:["inside","outside"],energy:"medium",cost:"free",desc:"Cache 5 objets simples. Donne des indices de plus en plus faciles jusqu'à ce qu'ils trouvent tout."},
+ {e:"⚽",n:"Ballon dehors",d:[10,20,30],p:["outside"],energy:"medium",cost:"free",desc:"Soccer, passes, ballon-chasseur improvisé ou juste se lancer un ballon. Aucun setup compliqué."},
+ {e:"🚶",n:"Marche mission",d:[20,30],p:["outside"],energy:"low",cost:"free",desc:"Petite marche. Mission: trouver 3 choses rouges, 2 animaux et quelque chose de vraiment bizarre."},
+ {e:"🏃",n:"Course jusqu'au poteau",d:[10,20],p:["outside"],energy:"high",cost:"free",desc:"Petites courses très courtes: arbre, poteau, entrée, retour. Les enfants choisissent les destinations."},
+ {e:"🫧",n:"Bulles et poursuite",d:[10,20],p:["outside"],energy:"medium",cost:"free",desc:"Si vous avez des bulles, un fait les bulles et les autres essaient de toutes les éclater."},
+ {e:"🌳",n:"Parc express",d:[30],p:["outside"],energy:"medium",cost:"free",desc:"Pas besoin d'y passer l'après-midi. 30 minutes au parc, puis retour."},
+ {e:"🚲",n:"Tour de vélo / trottinette",d:[20,30],p:["outside"],energy:"medium",cost:"free",desc:"Petit tour dans le quartier à leur rythme."},
+ {e:"📸",n:"Défi photo drôle",d:[20],p:["inside","outside"],energy:"low",cost:"free",desc:"Faites 5 photos à thème: saut, grimace, superhéros, géant, photo la plus bizarre."},
+ {e:"🧠",n:"Devine ce que je pense",d:[10],p:["inside","outside"],energy:"low",cost:"free",desc:"Un pense à un animal, objet ou personnage. Les autres posent seulement des questions oui/non."},
+ {e:"🎭",n:"Mime en famille",d:[10,20],p:["inside"],energy:"medium",cost:"free",desc:"Animaux, métiers, films, objets. Les plus petits peuvent choisir ce qu'ils veulent mimer."},
+ {e:"🍳",n:"Aide-moi à cuisiner",d:[20,30],p:["inside"],energy:"medium",cost:"free",desc:"Transforme une partie du repas en activité: chacun a une mini mission simple et sécuritaire."},
+ {e:"🧦",n:"Basket de bas",d:[10,20],p:["inside"],energy:"medium",cost:"free",desc:"Roulez des bas propres en boule et lancez-les dans un panier. Éloignez-vous à chaque réussite."},
+ {e:"🛋️",n:"Le sol est en lave",d:[10,20],p:["inside"],energy:"medium",cost:"free",desc:"Coussins et zones sécuritaires seulement. Traversez une pièce sans toucher le sol."},
+ {e:"🤪",n:"Défi 5 minutes fou",d:[10],p:["inside","outside"],energy:"medium",cost:"free",desc:"Chacun invente un mini défi de 30 secondes: danse, équilibre, imitation, marche bizarre."},
+ {e:"💬",n:"Questions rigolotes",d:[10,20],p:["inside"],energy:"low",cost:"free",desc:"Posez-vous des questions: superpouvoir préféré, repas pour toujours, animal géant ou minuscule, etc."},
+ {e:"🖍️",n:"Dessine papa / maman",d:[20],p:["inside"],energy:"low",cost:"free",desc:"Tout le monde dessine un parent. Interdiction de se vexer 😂."},
+ {e:"🎤",n:"Karaoké salon",d:[20,30],p:["inside"],energy:"medium",cost:"free",desc:"Chacun choisit une chanson connue. La performance compte plus que le talent."},
+ {e:"🧸",n:"Combat de coussins doux",d:[10],p:["inside"],energy:"high",cost:"free",desc:"Version contrôlée: coussins légers, pas au visage, stop immédiat quand quelqu'un dit stop."}
+];
+
+let state = JSON.parse(localStorage.getItem("beastFamilyState") || "null") || {
+  weeklyGoal:3, history:[], children:"", partner:""
+};
+let currentActivity = null;
+let selectedDuration = 10, selectedPlace="any", selectedEnergy="any", selectedCost="any";
+let timerSeconds=0, timerTotal=0, timerId=null, timerMeta=null;
+
+function save(){localStorage.setItem("beastFamilyState", JSON.stringify(state));}
+function mondayOf(date){
+  const d=new Date(date); const day=(d.getDay()+6)%7; d.setHours(0,0,0,0); d.setDate(d.getDate()-day); return d;
+}
+function thisWeekHistory(){
+  const m=mondayOf(new Date());
+  return state.history.filter(x=>new Date(x.date)>=m && x.type!=="couple");
+}
+function updateDashboard(){
+  const wh=thisWeekHistory();
+  const min=wh.reduce((s,x)=>s+x.minutes,0);
+  const moments=wh.length;
+  const goal=Number(state.weeklyGoal||3);
+  document.getElementById("weekMinutes").textContent=min;
+  document.getElementById("weekMoments").textContent=moments;
+  document.getElementById("weekGoalTxt").textContent=`${moments}/${goal}`;
+  const pct=Math.min(100,Math.round(moments/goal*100));
+  document.getElementById("goalPercent").textContent=pct+" %";
+  document.getElementById("goalBar").style.width=pct+"%";
+  document.getElementById("goalSentence").textContent=`${goal} moments famille cette semaine`;
+  document.getElementById("goalNote").textContent = moments>=goal
+    ? "🎉 Objectif atteint! Tout ce qui s'ajoute maintenant est juste du bonus."
+    : "Aucune punition si une journée déborde. On compte juste les moments faits.";
+}
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.screen===id));
+  if(id==="home")updateDashboard();
+  if(id==="history")renderHistory();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openPicker(){showScreen("pick")}
+function setupChipGroup(group,attr,setter){
+  document.querySelectorAll(`#${group} .chip`).forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(`#${group} .chip`).forEach(x=>x.classList.remove("on"));
+      btn.classList.add("on"); setter(btn.dataset[attr]);
+    });
+  });
+}
+setupChipGroup("durationChips","duration",v=>selectedDuration=Number(v));
+setupChipGroup("placeChips","place",v=>selectedPlace=v);
+setupChipGroup("energyChips","energy",v=>selectedEnergy=v);
+setupChipGroup("costChips","cost",v=>selectedCost=v);
+
+function filtered(){
+  let a=activities.filter(x=>x.d.includes(selectedDuration));
+  if(selectedPlace!=="any") a=a.filter(x=>x.p.includes(selectedPlace));
+  if(selectedEnergy!=="any") a=a.filter(x=>x.energy===selectedEnergy);
+  if(selectedCost!=="any") a=a.filter(x=>x.cost===selectedCost);
+  return a.length?a:activities.filter(x=>x.d.includes(selectedDuration));
+}
+function pickActivity(force=null){
+  let pool=activities;
+  if(force==="low") pool=activities.filter(x=>x.energy==="low");
+  else if(force==="outside") pool=activities.filter(x=>x.p.includes("outside"));
+  else if(force==="free") pool=activities.filter(x=>x.cost==="free");
+  else pool=filtered();
+  currentActivity=pool[Math.floor(Math.random()*pool.length)];
+  if(!force && !currentActivity.d.includes(selectedDuration)) selectedDuration=currentActivity.d[0];
+  const dur = force ? currentActivity.d[0] : selectedDuration;
+  const area=document.getElementById("pickedArea");
+  area.innerHTML=`<div class="activity-card">
+    <div class="emoji">${currentActivity.e}</div>
+    <h3>${currentActivity.n}</h3>
+    <p>${currentActivity.desc}</p>
+    <div class="tags">
+      <span class="tag">⏱️ ${dur} min</span>
+      <span class="tag">${currentActivity.p.includes("outside")?"☀️ Dehors possible":"🏠 Dedans"}</span>
+      <span class="tag">${currentActivity.energy==="low"?"😵 Facile":currentActivity.energy==="high"?"🔥 Énergique":"🙂 Moyen"}</span>
+      <span class="tag">💸 Gratuit</span>
+    </div>
+    <div class="actions">
+      <button class="go" onclick="startActivity(${dur})">❤️ ON LE FAIT</button>
+      <button class="again" onclick="pickActivity('${force||""}')">↻ Une autre</button>
+    </div>
+  </div>`;
+}
+function quickPick(force){
+  showScreen("pick");
+  pickActivity(force);
+  setTimeout(()=>document.getElementById("pickedArea").scrollIntoView({behavior:"smooth",block:"center"}),100);
+}
+function startActivity(minutes){
+  startCustomTimer(minutes,currentActivity?.n||"Moment famille",currentActivity?.desc||"", "family");
+}
+function startHouseworkBreak(){
+  startCustomTimer(20,"🧹🚫 LE MÉNAGE ATTEND","Pendant 20 minutes, aucune tâche n'est plus importante que votre moment ensemble.","family");
+}
+function startCustomTimer(minutes,title,desc,type="couple"){
+  clearInterval(timerId);
+  timerSeconds=minutes*60; timerTotal=minutes*60;
+  timerMeta={minutes,title,desc,type};
+  document.getElementById("timerTitle").textContent=title;
+  document.getElementById("timerActivity").textContent=desc;
+  document.getElementById("timerMessage").textContent= type==="couple"
+    ? "💑 Téléphone de côté. Pas de tâche en parallèle. Juste vous deux."
+    : "🧹 Le ménage peut attendre. Pendant ce chrono, vous passez en premier.";
+  updateTimer();
+  showScreen("timer");
+  timerId=setInterval(()=>{
+    timerSeconds=Math.max(0,timerSeconds-1); updateTimer();
+    if(timerSeconds===0){clearInterval(timerId); navigator.vibrate?.([200,100,200]);}
+  },1000);
+}
+function updateTimer(){
+  const m=Math.floor(timerSeconds/60), s=timerSeconds%60;
+  document.getElementById("timerDisplay").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+function cancelTimer(){
+  clearInterval(timerId); timerId=null;
+  showScreen("home");
+}
+function completeMoment(){
+  if(!timerMeta)return;
+  clearInterval(timerId);
+  const elapsed = Math.max(1, Math.round((timerTotal-timerSeconds)/60));
+  const credit = Math.min(timerMeta.minutes, elapsed || timerMeta.minutes);
+  // If user taps complete very quickly, credit planned time only after 1 min;
+  // otherwise record elapsed rounded. Makes accidental taps less harmful.
+  state.history.unshift({
+    id:Date.now(),date:new Date().toISOString(),
+    minutes:credit,title:timerMeta.title,type:timerMeta.type
+  });
+  save(); timerId=null;
+  alert(`❤️ Beau moment! +${credit} min enregistrées.`);
+  showScreen("home");
+}
+function renderHistory(){
+  const total=state.history.filter(x=>x.type!=="couple").reduce((s,x)=>s+x.minutes,0);
+  document.getElementById("allMinutes").textContent=`${total} min ensemble depuis le début`;
+  const box=document.getElementById("historyList");
+  if(!state.history.length){box.innerHTML='<p class="note">Ton premier moment va apparaître ici. ❤️</p>';return}
+  box.innerHTML=state.history.map(x=>{
+    const d=new Date(x.date);
+    const ds=d.toLocaleDateString("fr-CA",{weekday:"short",day:"numeric",month:"short"});
+    return `<div class="history-item"><div><b>${x.type==="couple"?"💑":"❤️"} ${x.title}</b><br><small>${ds}</small></div><b>${x.minutes} min</b></div>`
+  }).join("");
+}
+function renderIdeas(filter="all",btn=null){
+  if(btn){
+    btn.parentElement.querySelectorAll(".chip").forEach(x=>x.classList.remove("on")); btn.classList.add("on");
+  }
+  let pool=activities;
+  if(filter==="inside") pool=pool.filter(x=>x.p.includes("inside"));
+  if(filter==="outside") pool=pool.filter(x=>x.p.includes("outside"));
+  if(filter==="low") pool=pool.filter(x=>x.energy==="low");
+  document.getElementById("ideasList").innerHTML=pool.map((x,i)=>`
+   <div class="activity-card" style="margin:10px 0">
+    <div class="emoji" style="font-size:32px">${x.e}</div><h3 style="font-size:19px">${x.n}</h3>
+    <p>${x.desc}</p>
+    <div class="tags"><span class="tag">⏱️ ${x.d.join("/")} min</span><span class="tag">${x.energy==="low"?"😵 Facile":x.energy==="high"?"🔥 Énergique":"🙂 Moyen"}</span></div>
+    <button class="secondary" onclick='currentActivity=activities[${activities.indexOf(x)}];startActivity(${x.d[0]})'>Faire celle-là ❤️</button>
+   </div>`).join("");
+}
+function openSettings(){
+  document.getElementById("weeklyGoal").value=state.weeklyGoal||3;
+  document.getElementById("childrenNames").value=state.children||"";
+  document.getElementById("partnerName").value=state.partner||"";
+  document.getElementById("settingsModal").classList.add("on");
+}
+function closeSettings(){document.getElementById("settingsModal").classList.remove("on")}
+function saveSettings(){
+  state.weeklyGoal=Number(document.getElementById("weeklyGoal").value);
+  state.children=document.getElementById("childrenNames").value.trim();
+  state.partner=document.getElementById("partnerName").value.trim();
+  save(); closeSettings(); updateDashboard();
+}
+
+updateDashboard();
+renderIdeas("all");
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
